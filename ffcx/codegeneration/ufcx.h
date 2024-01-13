@@ -338,6 +338,27 @@ extern "C"
       const int* restrict entity_local_index,
       const uint8_t* restrict quadrature_permutation);
 
+  /// Return CUDA C++ source code for the ufc_tabulate_tensor kernel
+  ///
+  /// @param[out] num_program_headers
+  ///         The number of headers required by the program
+  /// @param[out] program_headers
+  ///         Entire contents of each header file
+  /// @param[out] program_include_names
+  ///         Names of each header file
+  /// @param[out] program_src
+  ///         CUDA C++ source code for the program containing the
+  ///         tabulate_tensor function.
+  /// @param[out] tabulate_tensor_function_name
+  ///         The name of the device-side function.
+  ///
+  typedef void(ufcx_tabulate_tensor_cuda)(
+      int* num_program_headers,
+      const char*** program_headers,
+      const char*** program_include_names,
+      const char** program_src,
+      const char** tabulate_tensor_function_name);
+
   typedef struct ufcx_integral
   {
     const bool* enabled_coefficients;
@@ -346,6 +367,7 @@ extern "C"
     ufcx_tabulate_tensor_longdouble* tabulate_tensor_longdouble;
     ufcx_tabulate_tensor_complex64* tabulate_tensor_complex64;
     ufcx_tabulate_tensor_complex128* tabulate_tensor_complex128;
+    ufcx_tabulate_tensor_cuda* tabulate_tensor_cuda;
     bool needs_facet_permutations;
 
     /// Get the coordinate element associated with the geometry of the mesh.

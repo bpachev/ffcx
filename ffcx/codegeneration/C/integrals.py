@@ -55,12 +55,14 @@ def generator(ir, options):
 
     code["additional_includes_set"] = set()  # FIXME: Get this out of code[]
     code["tabulate_tensor"] = body
+    code["tabulate_tensor_quoted"] = body.replace('\n', '\\n"\n    "')
 
     implementation = ufcx_integrals.factory.format(
         factory_name=factory_name,
         enabled_coefficients=code["enabled_coefficients"],
         enabled_coefficients_init=code["enabled_coefficients_init"],
         tabulate_tensor=code["tabulate_tensor"],
+        tabulate_tensor_quoted=code["tabulate_tensor_quoted"],
         needs_facet_permutations="true" if ir.needs_facet_permutations else "false",
         scalar_type=dtype_to_c_type(options["scalar_type"]),
         geom_type=dtype_to_c_type(dtype_to_scalar_dtype(options["scalar_type"])),
