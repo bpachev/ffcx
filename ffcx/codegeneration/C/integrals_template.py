@@ -27,7 +27,7 @@ void tabulate_tensor_cuda_{factory_name}(int* num_program_headers,
                                          const char** tabulate_tensor_function_name)
 {{
   const char* program_src = ""
-    "#define alignas(x)\\n
+    "#define alignas(x)\\n"
     "#define restrict __restrict__\\n"
     "\\n"
     "typedef unsigned char uint8_t;\\n"
