@@ -92,20 +92,8 @@ extern "C"
     /// Topological dimension of the cell
     int topological_dimension;
 
-    /// Geometric dimension of the cell
-    int geometric_dimension;
-
     /// Dimension of the finite element function space
     int space_dimension;
-
-    /// Rank of the value space
-    int value_rank;
-
-    /// Dimension of the value space for axis i
-    int* value_shape;
-
-    /// Number of components of the value space
-    int value_size;
 
     /// Rank of the reference value space
     int reference_value_rank;
@@ -309,16 +297,6 @@ extern "C"
       const uint8_t* restrict quadrature_permutation);
 
   /// Tabulate integral into tensor A with compiled
-  /// quadrature rule and extended double precision
-  ///
-  /// @see ufcx_tabulate_tensor_single
-  typedef void(ufcx_tabulate_tensor_longdouble)(
-      long double* restrict A, const long double* restrict w,
-      const long double* restrict c, const long double* restrict coordinate_dofs,
-      const int* restrict entity_local_index,
-      const uint8_t* restrict quadrature_permutation);
-
-  /// Tabulate integral into tensor A with compiled
   /// quadrature rule and complex single precision
   ///
   /// @see ufcx_tabulate_tensor_single
@@ -364,7 +342,6 @@ extern "C"
     const bool* enabled_coefficients;
     ufcx_tabulate_tensor_float32* tabulate_tensor_float32;
     ufcx_tabulate_tensor_float64* tabulate_tensor_float64;
-    ufcx_tabulate_tensor_longdouble* tabulate_tensor_longdouble;
     ufcx_tabulate_tensor_complex64* tabulate_tensor_complex64;
     ufcx_tabulate_tensor_complex128* tabulate_tensor_complex128;
     ufcx_tabulate_tensor_cuda* tabulate_tensor_cuda;
@@ -385,7 +362,6 @@ extern "C"
     ///
     ufcx_tabulate_tensor_float32* tabulate_tensor_float32;
     ufcx_tabulate_tensor_float64* tabulate_tensor_float64;
-    ufcx_tabulate_tensor_longdouble* tabulate_tensor_longdouble;
     ufcx_tabulate_tensor_complex64* tabulate_tensor_complex64;
     ufcx_tabulate_tensor_complex128* tabulate_tensor_complex128;
 
@@ -513,6 +489,12 @@ extern "C"
 
     /// The Basix variant of the finite element for the geometry map
     int geometry_basix_variant;
+
+    /// Rank of the value space
+    int value_rank;
+
+    /// Shape of the value space
+    int* value_shape;
   } ufcx_function_space;
 
 #ifdef __cplusplus
