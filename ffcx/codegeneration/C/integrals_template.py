@@ -40,7 +40,7 @@ void tabulate_tensor_cuda_{factory_name}(int* num_program_headers,
     "                                    const {scalar_type}* restrict c,\\n"
     "                                    const {geom_type}* restrict coordinate_dofs,\\n"
     "                                    const int* restrict entity_local_index,\\n"
-    "                                    const uint8_t* restrict quadrature_permutation,\\n"
+    "                                    const uint8_t* restrict quadrature_permutation\\n"
     "                                    )\\n"
     "{{\\n"
     "{tabulate_tensor_quoted}\\n"
