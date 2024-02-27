@@ -14,16 +14,29 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with FFCx. If not, see <http://www.gnu.org/licenses/>.
-#
-# The bilinear form a(u, v) and linear form L(v) for
-# Poisson's equation where spatial coordinates are used to define the source
-# and boundary flux terms.
+"""Spatial coordinates demo.
+
+The bilinear form a(u, v) and linear form L(v) for Poisson's equation where
+spatial coordinates are used to define the source and boundary flux terms.
+"""
+
 import basix.ufl
-from ufl import (FunctionSpace, Mesh, SpatialCoordinate, TestFunction,
-                 TrialFunction, ds, dx, exp, grad, inner, sin)
+from ufl import (
+    FunctionSpace,
+    Mesh,
+    SpatialCoordinate,
+    TestFunction,
+    TrialFunction,
+    ds,
+    dx,
+    exp,
+    grad,
+    inner,
+    sin,
+)
 
 element = basix.ufl.element("Lagrange", "triangle", 2)
-domain = Mesh(basix.ufl.element("Lagrange", "triangle", 1, shape=(2, )))
+domain = Mesh(basix.ufl.element("Lagrange", "triangle", 1, shape=(2,)))
 space = FunctionSpace(domain, element)
 
 u = TrialFunction(space)
@@ -36,4 +49,4 @@ f = 10.0 * exp(-(d_x * d_x + d_y * d_y) / 0.02)
 g = sin(5.0 * x[0])
 
 a = inner(grad(u), grad(v)) * dx
-L = f * v * dx + g * v * ds
+L = inner(f, v) * dx + inner(g, v) * ds
