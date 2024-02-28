@@ -58,6 +58,9 @@ UFC_INTEGRAL_DECL += "\n".join(
 UFC_INTEGRAL_DECL += "\n".join(
     re.findall(r"typedef void ?\(ufcx_tabulate_tensor_longdouble\).*?\);", ufcx_h, re.DOTALL)
 )
+UFC_INTEGRAL_DECL += "\n".join(
+    re.findall(r"typedef void ?\(ufcx_tabulate_tensor_cuda\).*?\);", ufcx_h, re.DOTALL)
+)
 
 UFC_INTEGRAL_DECL += "\n".join(
     re.findall("typedef struct ufcx_integral.*?ufcx_integral;", ufcx_h, re.DOTALL)
