@@ -13,7 +13,7 @@
 #define UFCX_VERSION_MAJOR 0
 #define UFCX_VERSION_MINOR 8
 #define UFCX_VERSION_MAINTENANCE 0
-#define UFCX_VERSION_RELEASE 0
+#define UFCX_VERSION_RELEASE 1
 
 #if UFCX_VERSION_RELEASE
 #define UFCX_VERSION                                                            \
@@ -106,6 +106,9 @@ extern "C"
 
     /// Maximum polynomial degree of the finite element function space
     int degree;
+
+    /// Is the value a symmetric 2-tensor
+    bool symmetric;
 
     /// Block size for a VectorElement. For a TensorElement, this is the
     /// product of the tensor's dimensions
@@ -383,12 +386,11 @@ extern "C"
     /// Number of evaluation points
     int num_points;
 
-    /// Dimension of evaluation point, i.e. topological dimension of
-    /// reference cell
-    int topological_dimension;
+    /// Dimension of evaluation point
+    int entity_dimension;
 
     /// Coordinates of evaluations points. Dimensions:
-    /// points[num_points][topological_dimension]
+    /// points[num_points][entity_dimension]
     const double* points;
 
     /// Shape of expression. Dimension: value_shape[num_components]
