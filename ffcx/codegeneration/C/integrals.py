@@ -68,7 +68,7 @@ def generator(ir: IntegralIR, options):
     np_scalar_type = np.dtype(options["scalar_type"]).name
     code[f"tabulate_tensor_{np_scalar_type}"] = f"tabulate_tensor_{factory_name}"
 
-    implementation = ufcx_integrals.factory.format(
+    implementation = ufcx_integrals.get_factory(options).format(
         factory_name=factory_name,
         enabled_coefficients=code["enabled_coefficients"],
         enabled_coefficients_init=code["enabled_coefficients_init"],
