@@ -30,6 +30,7 @@ ufcx_integral {factory_name} =
   .tabulate_tensor_float64 = {tabulate_tensor_float64},
   .tabulate_tensor_complex64 = {tabulate_tensor_complex64},
   .tabulate_tensor_complex128 = {tabulate_tensor_complex128},
+  .tabulate_tensor_cuda = {tabulate_tensor_cuda},
   .needs_facet_permutations = {needs_facet_permutations},
   .coordinate_element = {coordinate_element},
 }};
@@ -72,12 +73,12 @@ void tabulate_tensor_cuda_{factory_name}(int* num_program_headers,
   *tabulate_tensor_function_name = "tabulate_tensor_{factory_name}";
 }}
 
-{factory_name}.tabulate_tensor_cuda = tabulate_tensor_cuda_{factory_name};
 // End CUDA wrapper for integral {factory_name}
+
 """
 
 def get_factory(options):
     if options.get("cuda"):
-        return factory + cuda_wrapper
+        return cuda_wrapper + factory
     else:
         return factory
