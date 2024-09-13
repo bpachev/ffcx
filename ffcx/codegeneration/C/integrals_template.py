@@ -21,6 +21,26 @@ void tabulate_tensor_{factory_name}({scalar_type}* restrict A,
 {tabulate_tensor}
 }}
 
+{enabled_coefficients_init}
+
+ufcx_integral {factory_name} =
+{{
+  .enabled_coefficients = {enabled_coefficients},
+  .tabulate_tensor_float32 = {tabulate_tensor_float32},
+  .tabulate_tensor_float64 = {tabulate_tensor_float64},
+  .tabulate_tensor_complex64 = {tabulate_tensor_complex64},
+  .tabulate_tensor_complex128 = {tabulate_tensor_complex128},
+  .tabulate_tensor_cuda = {tabulate_tensor_cuda},
+  .needs_facet_permutations = {needs_facet_permutations},
+  .coordinate_element = {coordinate_element},
+}};
+
+// End of code for integral {factory_name}
+"""
+
+cuda_wrapper = """
+
+// Begin CUDA wrapper for integral {factory_name}
 void tabulate_tensor_cuda_{factory_name}(int* num_program_headers,
                                          const char*** program_headers,
                                          const char*** program_include_names,
@@ -53,19 +73,12 @@ void tabulate_tensor_cuda_{factory_name}(int* num_program_headers,
   *tabulate_tensor_function_name = "tabulate_tensor_{factory_name}";
 }}
 
-{enabled_coefficients_init}
+// End CUDA wrapper for integral {factory_name}
 
-ufcx_integral {factory_name} =
-{{
-  .enabled_coefficients = {enabled_coefficients},
-  .tabulate_tensor_float32 = {tabulate_tensor_float32},
-  .tabulate_tensor_float64 = {tabulate_tensor_float64},
-  .tabulate_tensor_complex64 = {tabulate_tensor_complex64},
-  .tabulate_tensor_complex128 = {tabulate_tensor_complex128},
-  .tabulate_tensor_cuda = tabulate_tensor_cuda_{factory_name},
-  .needs_facet_permutations = {needs_facet_permutations},
-  .coordinate_element = {coordinate_element},
-}};
-
-// End of code for integral {factory_name}
 """
+
+def get_factory(options):
+    if options.get("cuda"):
+        return cuda_wrapper + factory
+    else:
+        return factory
