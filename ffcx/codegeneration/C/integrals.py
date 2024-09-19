@@ -67,7 +67,7 @@ def generator(ir: IntegralIR, options):
     code["tabulate_tensor_complex128"] = "NULL"
     np_scalar_type = np.dtype(options["scalar_type"]).name
     code[f"tabulate_tensor_{np_scalar_type}"] = f"tabulate_tensor_{factory_name}"
-    code["tabulate_tensor_cuda"] = f"tabulate_tensor_cuda_{factory_name}" if options.get("cuda") else "NULL"
+    code["tabulate_tensor_cuda_nvrtc"] = f"tabulate_tensor_cuda_nvrtc_{factory_name}" if options.get("cuda") else "NULL"
 
     implementation = ufcx_integrals.get_factory(options).format(
         factory_name=factory_name,
@@ -83,7 +83,7 @@ def generator(ir: IntegralIR, options):
         tabulate_tensor_float64=code["tabulate_tensor_float64"],
         tabulate_tensor_complex64=code["tabulate_tensor_complex64"],
         tabulate_tensor_complex128=code["tabulate_tensor_complex128"],
-        tabulate_tensor_cuda=code["tabulate_tensor_cuda"],
+        tabulate_tensor_cuda_nvrtc=code["tabulate_tensor_cuda_nvrtc"],
     )
 
     return declaration, implementation
