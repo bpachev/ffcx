@@ -72,8 +72,9 @@ jobs:
         run: pip install .[ci,optional]
       - name: Install FFCx (macOS, Windows)
         if: runner.os != 'Linux'
-        run: pip install nvidia-pyindex
-        run: pip install .[ci]
+        run: |
+          pip install nvidia-pyindex
+          pip install .[ci]
 
       - name: Static check with mypy
         run: mypy ffcx/
