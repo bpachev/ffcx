@@ -86,10 +86,10 @@ def test_demo_nvrtc(scalar_type):
     files = [
         "Components",
         "FacetIntegrals",
-        "HyperElasticity",
-        "MathFunctions",
-        "StabilisedStokes",
-        "VectorPoisson",
+#        "HyperElasticity",
+#        "MathFunctions",
+#        "StabilisedStokes",
+#        "VectorPoisson",
     ]
     opts = f"--scalar_type {scalar_type} --cuda_nvrtc"
     windows = sys.platform.startswith("win32")

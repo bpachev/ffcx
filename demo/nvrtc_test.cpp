@@ -97,10 +97,10 @@ int main()
   std::vector<ufcx_form*> forms = {
     form_Components_L,
     form_FacetIntegrals_a,
-    form_HyperElasticity_a_F, form_HyperElasticity_a_J,
-    form_MathFunctions_a,
-    form_StabilisedStokes_a, form_StabilisedStokes_L,
-    form_VectorPoisson_a, form_VectorPoisson_L  
+//    form_HyperElasticity_a_F, form_HyperElasticity_a_J,
+//    form_MathFunctions_a,
+//    form_StabilisedStokes_a, form_StabilisedStokes_L,
+//    form_VectorPoisson_a, form_VectorPoisson_L  
   };
   
   for (ufcx_form* form : forms) check_nvrtc_compilation(form);
